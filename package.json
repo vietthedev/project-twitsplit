@@ -1,0 +1,61 @@
+{
+  "name": "project-twitsplit",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1",
+    "styled-components": "^4.1.2"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-prettier-standard": "^2.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "flow-bin": "^0.87.0",
+    "flow-typed": "^2.5.1",
+    "rimraf": "^2.6.2"
+  },
+  "peerDependencies": {
+    "jest": "23.x"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "flow": "flow",
+    "flow-typed": "flow-typed install --ignoreDeps dev",
+    "clean": "rimraf build",
+    "clean-type": "rimraf flow-typed/npm",
+    "clean-all": "rimraf build flow-typed/npm node_modules",
+    "postinstall": "npm run flow-typed"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "standard",
+      "standard-react"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/S_a_l_a_d/project-twitsplit.git"
+  },
+  "author": "Viet Huynh <viet.huynhlamquoc@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/S_a_l_a_d/project-twitsplit/issues"
+  }
+}
