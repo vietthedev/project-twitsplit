@@ -6,6 +6,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
+    "react-textarea-autosize": "^7.1.0-1",
     "styled-components": "^4.1.2"
   },
   "devDependencies": {
@@ -29,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "flow": "flow",
-    "flow-typed": "flow-typed install --ignoreDeps dev",
+    "flow-typed": "flow-typed install --overwrite --ignoreDeps dev",
     "clean": "rimraf build",
     "clean-type": "rimraf flow-typed/npm",
     "clean-all": "rimraf build flow-typed/npm node_modules",
