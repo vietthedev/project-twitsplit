@@ -25,8 +25,9 @@ export default class App extends Component<AppProps, AppState> {
 
     this.state = {
       messages: [
-        '1/1 This is the first message.',
-        '1/1 This is the second message.'
+        'This is the first message.',
+        '1/2 This is the second message which has more',
+        '2/2 than 50 characters.'
       ],
       addMessages: this.addMessages }
   }
