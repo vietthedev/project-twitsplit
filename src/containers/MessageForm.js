@@ -86,12 +86,8 @@ export default class MessageForm extends PureComponent<MessageFormProps, Message
   }
 
   handleSubmit (event: SyntheticEvent<HTMLFormElement>) {
-    this.context.addMessages([
-      {
-        id: Math.max(...this.context.messages.map(message => message.id)) + 1,
-        content: this.state.value.trim()
-      }
-    ])
+    this.context.addMessages([this.state.value.trim().replace(/\n/g, ' ')])
+    this.setState({ value: '' })
 
     event.preventDefault()
   }
@@ -100,7 +96,13 @@ export default class MessageForm extends PureComponent<MessageFormProps, Message
     return (
       <form onSubmit={this.handleSubmit}>
         <StyledInputDiv>
-          <StyledTextArea autoFocus placeholder="What's happening?" onChange={this.handleChange} />
+          <StyledTextArea
+            async
+            autoFocus
+            placeholder="What's happening?"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
         </StyledInputDiv>
         <StyledButtonDiv>
           <StyledButton type='submit' disabled={!this.state.value.trim()}>Tweet</StyledButton>
