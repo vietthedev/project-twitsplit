@@ -1,7 +1,7 @@
 // @flow
 
 import { splitMessage } from './index'
-import { MESSAGE_LIMIT_EXCEEDED_ERROR } from '../constants'
+import { MESSAGE_CHARACTER_LIMIT, MESSAGE_LIMIT_EXCEEDED_ERROR } from '../constants'
 
 it('should split a message correctly when the message is valid', () => {
   expect(splitMessage("I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself."))
@@ -25,13 +25,13 @@ it('should split another valid message correctly', () => {
     ])
 })
 
-it('should split a message into chunks with their length no greater than 50', () => {
+it('should split a message into chunks with their length no greater than the character limit', () => {
   expect(splitMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget tincidunt ante. Donec finibus nulla sit amet risus auctor lacinia. Suspendisse sed ipsum sit amet nisl convallis euismod. Duis odio massa, maximus in diam non, consectetur mollis dui. Sed nisl dui, ultrices eu sapien aliquet, fermentum faucibus nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer sed viverra libero. Etiam auctor sagittis dui at feugiat.')
-    .every(chunk => chunk.length <= 50))
+    .every(chunk => chunk.length <= MESSAGE_CHARACTER_LIMIT))
     .toBe(true)
 })
 
-it('should throw Error when there is a word whose length is greater than 50 characters in the message', () => {
+it('should throw Error when there is a word whose length is greater than the character limit in the message', () => {
   try {
     splitMessage('This is a message with a looooooooooooooooooooooooooooooooooooooooooooooong word.')
   } catch (ex) {
@@ -39,7 +39,7 @@ it('should throw Error when there is a word whose length is greater than 50 char
   }
 })
 
-it('should throw Error when there is a word that concatenating it with the indicator would exceed 50 characters limit',
+it('should throw Error when there is a word that concatenating it with the indicator would exceed the character limit',
   () => {
     try {
       splitMessage('This is hell-of-a-word-because-it-is-very-very-very-long')
