@@ -6,6 +6,8 @@ import Textarea from 'react-textarea-autosize'
 
 import MessageContext from '../store/MessageContext'
 
+import { normalizeMessage, splitMessage } from '../common/utils'
+
 const StyledInputDiv = styled.div`
 text-align: center;
 `
@@ -59,11 +61,15 @@ transition: all .15s ease-in-out;
   cursor: not-allowed;
 }
 `
+const ErrorMessage = styled.span`
+color: #f00;
+`
 
 type MessageFormProps = any
 
 type MessageFormState = {
-  value: string
+  value: string,
+  errorMessage: string
 }
 
 export default class MessageForm extends PureComponent<MessageFormProps, MessageFormState> {
@@ -75,7 +81,7 @@ export default class MessageForm extends PureComponent<MessageFormProps, Message
   constructor (props: MessageFormProps) {
     super(props)
 
-    this.state = { value: '' }
+    this.state = { value: '', errorMessage: '' }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -86,8 +92,14 @@ export default class MessageForm extends PureComponent<MessageFormProps, Message
   }
 
   handleSubmit (event: SyntheticEvent<HTMLFormElement>) {
-    this.context.addMessages([this.state.value.trim().replace(/\n/g, ' ')])
-    this.setState({ value: '' })
+    try {
+      const message = normalizeMessage(this.state.value)
+
+      this.context.addMessages(message.length <= 50 ? [message] : splitMessage(message))
+      this.setState({ value: '', errorMessage: '' })
+    } catch (ex) {
+      this.setState({ errorMessage: ex.message })
+    }
 
     event.preventDefault()
   }
@@ -103,6 +115,7 @@ export default class MessageForm extends PureComponent<MessageFormProps, Message
             value={this.state.value}
             onChange={this.handleChange}
           />
+          {this.state.errorMessage ? <div><ErrorMessage>{this.state.errorMessage}</ErrorMessage></div> : null}
         </StyledInputDiv>
         <StyledButtonDiv>
           <StyledButton type='submit' disabled={!this.state.value.trim()}>Tweet</StyledButton>
