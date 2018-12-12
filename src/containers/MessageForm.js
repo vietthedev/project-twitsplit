@@ -6,6 +6,7 @@ import Textarea from 'react-textarea-autosize'
 
 import MessageContext from '../store/MessageContext'
 
+import { MESSAGE_CHARACTER_LIMIT } from '../common/constants'
 import { normalizeMessage, splitMessage } from '../common/utils'
 
 const StyledInputDiv = styled.div`
@@ -95,7 +96,7 @@ export default class MessageForm extends PureComponent<MessageFormProps, Message
     try {
       const message = normalizeMessage(this.state.value)
 
-      this.context.addMessages(message.length <= 50 ? [message] : splitMessage(message))
+      this.context.addMessages(message.length <= MESSAGE_CHARACTER_LIMIT ? [message] : splitMessage(message))
       this.setState({ value: '', errorMessage: '' })
     } catch (ex) {
       this.setState({ errorMessage: ex.message })
