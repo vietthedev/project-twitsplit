@@ -16,7 +16,7 @@ Suppose the user wants to send the following message:
 
 This is 91 characters excluding the surrounding quotes. When the user presses send, it will send the following messages:
 
-> 1/2 I can't believe Tweeter now supports chunking" "2/2 my messages, so I don't have to do it myself.
+> "1/2 I can't believe Tweeter now supports chunking" "2/2 my messages, so I don't have to do it myself."
 
 Each message is now 49 characters, each within the allowed limit.
 
@@ -32,6 +32,7 @@ Each message is now 49 characters, each within the allowed limit.
 * The functionality that splits messages should be a standalone function.
 
 Given the above example, its function call would look like:
+
 ```javascript
 splitMessage("I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself.")
 ```
@@ -41,6 +42,7 @@ and it would return
 ```javascript
 ["1/2 I can't believe Tweeter now supports chunking", "2/2 my messages, so I don't have to do it myself."]
 ```
+
 * The business logic (a.k.a. the message splitter) should be unit tested. We have to know it works, right?
 * The submission should be a git repository. In the project directory, `git log` should show your commits.
 * Bonus points for any additional polish and sophistication you add to the experience.
